@@ -44,15 +44,14 @@
 	for (var i = 0; i < gifList.length; i++) {
        
       
-    console.log(gifList[i]);
+//    console.log(gifList[i]);
     var button = document.createElement("button");
 	button.innerHTML = gifList[i];
 	arrayPosition[i] = i;
-	button.setAttribute("id", arrayPosition[i]);
-	button.setAttribute("class", gifList[i]);
+	//button.setAttribute("id", "data-still");
 	button.setAttribute("name", gifList[i]);
 	
-	console.log(arrayPosition[i]);
+	//console.log(arrayPosition[i]);
 	
 	
 	
@@ -67,7 +66,7 @@
 	$("#add-gitInput").on("click", function(event) {
 	event.preventDefault ();
 	var newGif = $("#gifInput").val().trim();
-	console.log(newGif);
+	//console.log(newGif);
 	gifList.push(newGif);
 	$("#buttons-here").empty();
 	getButtons();
@@ -75,18 +74,8 @@
 	});
 	
 	
-	
-	
-	
-	
-	
-	
-	}	
-	
-	
-     		
-     	
 
+	}	
 	
 
 	function getGif () {
@@ -101,7 +90,7 @@
 	console.log (x)
 	console.log (queryURL)
 
-
+  
 
 
 	$.ajax({
@@ -121,28 +110,28 @@
      		gifImage.attr("data-still", results[i].images.fixed_height_still.url);
      		gifImage.attr("data-animate", results[i].images.fixed_height.url);
      		gifImage.attr("class","gif");
+     		gifImage.attr("data-state", "still");
      		gifDiv.append(p);
      		gifDiv.append(gifImage);
      		//gifDiv.append(motion);
      		
      	//$("#rating-here").append(p);
-     	$("#gifs-here").append(gifDiv);	
-
-
-		
      	
+    
+
+
+     	$("#gifs-here").append(gifDiv);	 	
 		}
-	
-	
-});
+		
+		
+		
 
-});
-}
-
-	function animate () {
-	 $("#gifs").on("click", function() {
-	 console.log("fuck yeah");
-      var state = $(this).attr("data-state");
+   	   $(".gif").on('click',function(){
+	
+	 var state = $(this).attr("data-state");
+      // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+      // Then, set the image's data-state to animate
+      // Else set src to the data-still value
       if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
@@ -150,16 +139,25 @@
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
       }
-    });
-     		}
+	});	
+	
+});
+
+
+   });
+     		} 
+
 
     
     getButtons()
     newBtn()
     getGif()
-    animate()
+ 	
+    
+  
     
     
+   
     
 
 
